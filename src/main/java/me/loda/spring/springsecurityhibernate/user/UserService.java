@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,13 +26,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
-
     @Override
     public UserDetails loadUserByUsername(String username) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
         // Kiểm tra xem user có tồn tại trong database không?
-        User user = userRepository.findByUsername(username);
+        String pw = encoder.encode("123456");
+        User userLogin = new User(1l,"hoat", pw);
+
+        User user = new User();
+        if (username.equals(userLogin.getUsername()))
+            user = userLogin;
+
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }

@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  ci-cd:
+    container_name: ci-cd
+    build:
+      dockerfile: Dockerfile
+    image: cicd
+    ports:
+      - 8080:8080

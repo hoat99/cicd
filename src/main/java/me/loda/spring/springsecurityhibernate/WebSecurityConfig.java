@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import me.loda.spring.springsecurityhibernate.user.UserService;
+import org.springframework.stereotype.Component;
 
 /**
  * Copyright 2019 {@author Loda} (https://loda.me).
@@ -28,6 +29,7 @@ import me.loda.spring.springsecurityhibernate.user.UserService;
  */
 
 @EnableWebSecurity
+@Component
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired

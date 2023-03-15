@@ -14,7 +14,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import me.loda.spring.springsecurityhibernate.user.UserRepository;
+import me.loda.spring.springsecurityhibernate.user.User;
 
 /**
  * Copyright 2019 {@author Loda} (https://loda.me).
@@ -28,14 +28,11 @@ public class App implements CommandLineRunner {
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
     }
-
-    @Autowired
-    UserRepository userRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
 
     @Override
-    public void run(String... args) {
+    public void run(String... args)  {
 
     }
 }

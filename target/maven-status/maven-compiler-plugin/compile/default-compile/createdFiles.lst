@@ -1,0 +1,6 @@
+me\loda\spring\springsecurityhibernate\WebSecurityConfig.class
+me\loda\spring\springsecurityhibernate\App.class
+me\loda\spring\springsecurityhibernate\user\CustomUserDetails.class
+me\loda\spring\springsecurityhibernate\user\UserService.class
+me\loda\spring\springsecurityhibernate\user\User.class
+me\loda\spring\springsecurityhibernate\WebController.class
