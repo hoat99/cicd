@@ -28,6 +28,7 @@ public class WebController {
 
     @GetMapping("/hello")
     public String hello() {
+        System.out.println("a");
         return "hello";
     }
 
