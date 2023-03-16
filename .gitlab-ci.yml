@@ -13,6 +13,7 @@ before_script:
 build:
   stage: build
   tags:
+    - dev2
     - dev2-server
   script:
     - docker pull $CI_REGISTRY_IMAGE:latest || true
