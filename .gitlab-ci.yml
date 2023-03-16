@@ -6,7 +6,7 @@ main-build:
   image: maven:3.6.3-jdk-11-slim
   stage: build
   tags:
-    - dev2
+    - dev2-server
   script:
     - mvn clean install && mvn package -B -e
   artifacts:
@@ -19,7 +19,7 @@ main-deploy:
   image: ubuntu:21.04
   stage: deploy
   tags:
-    - dev2
+    - dev2-server
   script:
     - mv target/*.jar /home/dev/opt/springcicd.jar
     - sudo systemctl restart springcicd.service
