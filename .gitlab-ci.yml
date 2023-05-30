@@ -12,6 +12,7 @@ build:
   before_script:
     - source .env
   script:
+    - mvn install
     - mvn clean install  && mvn package
   artifacts:
     paths:
