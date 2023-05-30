@@ -8,7 +8,7 @@ build:
   image: maven:3.6.3-jdk-11-slim
   stage: build jar
   tags:
-    - runner-1
+    - dev2-server
   before_script:
     - source .env
   script:
@@ -20,7 +20,7 @@ docker build:
   image: springtest:latest
   stage: build and push docker image
   tags:
-    - runner-1
+    - dev2-server
   before_script:
     - source .env
   script:
@@ -31,6 +31,6 @@ deploy:
   image: ubuntu:latest
   stage: deploy
   tags:
-    - runner-1
+    - dev2-server
   script:
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io; docker stop $APP_NAME; docker system prune -a -f; docker pull $DOCKER_REPO; docker container run -d --name $APP_NAME -p $PORT $DOCKER_REPO; docker logout
