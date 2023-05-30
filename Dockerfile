@@ -5,7 +5,7 @@ MAINTAINER Harrison
 COPY pom.xml /build/
 COPY src /build/src/
 WORKDIR /build/
-RUN mvn clean install  && mvn package
+RUN mvn clean install
 FROM openjdk:11-slim
 #FROM openjdk:8-alpine FOR JAVA 8
 WORKDIR /app
