@@ -10,7 +10,7 @@ build:
   before_script:
     - source .env
   script:
-    - mvn clean install -Dspring.profiles.active=development && mvn package -B -e -Dspring.profiles.active=development
+    - mvn clean install  && mvn package
   artifacts:
     paths:
       - target/*.jar
@@ -20,11 +20,11 @@ docker build:
   before_script:
     - source .env
   script:
-    - docker build --build-arg SPRING_ACTIVE_PROFILE=development -t $DOCKER_REPO .
+    - docker build -t $DOCKER_REPO .
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
     - docker push $DOCKER_REPO
 deploy:
   image: ubuntu:latest
   stage: deploy
   script:
-    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io; docker stop $APP_NAME; docker system prune -a -f; docker pull $DOCKER_REPO; docker container run -d --name $APP_NAME -p $PORT -e SPRING_PROFILES_ACTIVE=$SPRING_ACTIVE_PROFILE $DOCKER_REPO; docker logout
+    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io; docker stop $APP_NAME; docker system prune -a -f; docker pull $DOCKER_REPO; docker container run -d --name $APP_NAME -p $PORT $DOCKER_REPO; docker logout
