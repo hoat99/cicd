@@ -21,13 +21,15 @@ docker build:
   stage: build and push docker image
   tags:
     - r1
+  variables:
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
   services:
     - name: docker:dind
-      entrypoint: ["dockerd-entrypoint.sh", "--tls=false"]
   before_script:
     - source .env
   script:
-    - export DOCKER_HOST=tcp://127.0.0.1:2375
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
     - docker build -t $DOCKER_REPO .
     - docker push $DOCKER_REPO
