@@ -1,5 +1,6 @@
 services:
   - docker:19.03.7-dind
+  - entrypoint: [ "dockerd-entrypoint.sh", "--tls=false" ]
 stages:
   - build jar
   - build and push docker image
@@ -25,7 +26,7 @@ docker build:
   before_script:
     - source .env
   script:
-    - docker -v
+    - export DOCKER_HOST=tcp://127.0.0.1:2375
     - docker build -t $DOCKER_REPO .
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
     - docker push $DOCKER_REPO
