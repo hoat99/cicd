@@ -18,7 +18,7 @@ build:
     paths:
       - target/*.jar
 docker build:
-  image: springtest:latest
+  image: docker:stable
   stage: build and push docker image
   tags:
     - local-docker
