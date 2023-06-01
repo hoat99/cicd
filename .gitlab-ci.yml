@@ -22,5 +22,9 @@ deploy:
   tags:
     - local-docker
   script:
+    - sudo apt-get install openssh-server
+    - sudo systemctl enable ssh
+    - sudo systemctl enable ssh --now
+    - sudo systemctl start ssh
     - ssh users@172.24.160.1
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io; docker stop $APP_NAME; docker system prune -a -f; docker pull $DOCKER_REPO; docker container run -d --name $APP_NAME -p $PORT $DOCKER_REPO; docker logout
