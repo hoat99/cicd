@@ -19,6 +19,8 @@ build:
 docker build:
   image: docker:stable
   stage: build and push docker image
+  tags:
+    - r1
   before_script:
     - source .env
   script:
