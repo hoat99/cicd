@@ -31,8 +31,8 @@ docker build:
     - source .env
   script:
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
-    - docker build -t $DOCKER_REPO .
-    - docker push $DOCKER_REPO
+    - docker build -t hoat35999/cicd .
+    - docker push hoat35999/cicd
 deploy:
   image: ubuntu:latest
   stage: deploy
