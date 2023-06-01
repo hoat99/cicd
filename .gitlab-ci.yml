@@ -8,7 +8,7 @@ build:
   image: maven:3.6.3-jdk-11-slim
   stage: build jar
   tags:
-    - local-docker
+    - r1
   before_script:
     - source .env
   script:
@@ -16,11 +16,19 @@ build:
   artifacts:
     paths:
       - target/*.jar
+docker build:
+  image: docker:stable
+  stage: build and push docker image
+  before_script:
+    - source .env
+  script:
+    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
+    - docker build --build-arg SPRING_ACTIVE_PROFILE=development -t $DOCKER_REPO .
+    - docker push $DOCKER_REPO
 deploy:
   image: ubuntu:latest
   stage: deploy
   tags:
     - local-docker
   script:
-    - ssh users@172.24.160.1
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io; docker stop $APP_NAME; docker system prune -a -f; docker pull $DOCKER_REPO; docker container run -d --name $APP_NAME -p $PORT $DOCKER_REPO; docker logout
