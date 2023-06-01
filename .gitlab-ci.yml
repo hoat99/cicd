@@ -16,17 +16,6 @@ build:
   artifacts:
     paths:
       - target/*.jar
-docker build:
-  image: docker:stable
-  stage: build and push docker image
-  tags:
-    - local-docker
-  before_script:
-    - source .env
-  script:
-    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
-    - docker build -t $DOCKER_REPO .
-    - docker push $DOCKER_REPO
 deploy:
   image: ubuntu:latest
   stage: deploy
