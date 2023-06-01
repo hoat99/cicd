@@ -21,6 +21,13 @@ docker build:
   stage: build and push docker image
   tags:
     - r1
+  services:
+    - name: docker:dind
+      alias: thedockerhost
+  variables:
+    DOCKER_HOST: tcp://thedockerhost:2375/
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
   before_script:
     - source .env
   script:
