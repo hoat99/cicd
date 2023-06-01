@@ -26,7 +26,7 @@ docker build:
     DOCKER_DRIVER: overlay2
     DOCKER_TLS_CERTDIR: ""
   services:
-    - name: docker:dind
+    - name: docker:19.03.7-dind
   before_script:
     - source .env
   script:
