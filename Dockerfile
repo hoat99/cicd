@@ -9,5 +9,6 @@ RUN mvn clean install
 FROM openjdk:11-slim
 #FROM openjdk:8-alpine FOR JAVA 8
 WORKDIR /app
+EXPOSE 8080
 COPY --from=MAVEN_BUILD /build/target/spring-security-hibernate-2.6.7.jar /app/spring-security-hibernate-2.6.7.jar
 ENTRYPOINT ["java", "-jar", "spring-security-hibernate-2.6.7.jar"]
