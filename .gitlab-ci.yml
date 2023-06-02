@@ -17,7 +17,7 @@ build:
     paths:
       - target/*.jar
 deploy:
-  image: docker:stable
+  image: docker:lastest
   stage: deploy
   before_script:
     - source .env
