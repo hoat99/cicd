@@ -17,7 +17,7 @@ build:
     paths:
       - target/*.jar
 deploy:
-  image: ubuntu:latest
+  image: docker:stable
   stage: deploy
   tags:
     - r1
