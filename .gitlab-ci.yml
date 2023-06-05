@@ -33,5 +33,5 @@ deploy:
     - docker stop hoat-cicd
     - docker system prune -a -f
     - docker pull hoat35999/cicd
-    - docker container run -d --name hoat-cicd -p 8080 hoat35999/cicd
+    - docker container run -d --name hoat-cicd -p 8080:8080 hoat35999/cicd
     - docker logout
