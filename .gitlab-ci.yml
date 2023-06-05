@@ -21,6 +21,8 @@ docker build:
   stage: build and push docker image
   before_script:
     - source .env
+  tags:
+    - shell-1
   script:
     - usermod -aG docker gitlab-runner
     - docker build -t $DOCKER_REPO .
