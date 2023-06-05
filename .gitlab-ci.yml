@@ -30,6 +30,7 @@ deploy:
     - shell-1
   script:
     - docker login -u hoat35999 -p 01653693151 docker.io
+    - docker rm -f hoat-cicd || true
     - docker system prune -a -f
     - docker pull hoat35999/cicd
     - docker container run -d --name hoat-cicd -p 8080 hoat35999/cicd
