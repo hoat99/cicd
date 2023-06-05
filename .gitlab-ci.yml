@@ -22,7 +22,7 @@ docker build:
   script:
     - docker build -t hoat35999/cicd .
     - docker login -u hoat35999 -p 01653693151 docker.io
-    - docker push $DOCKER_REPO
+    - docker push hoat35999/cicd
 deploy:
   image: ubuntu:latest
   stage: deploy
