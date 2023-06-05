@@ -20,7 +20,6 @@ docker build:
   tags:
     - shell-1
   script:
-    - usermod -aG docker gitlab-runner
     - docker build -t hoat35999/cicd .
     - docker login -u hoat35999 -p 01653693151 docker.io
     - docker push $DOCKER_REPO
@@ -30,7 +29,6 @@ deploy:
   tags:
     - shell-1
   script:
-    - usermod -aG docker gitlab-runner
     - docker login -u hoat35999 -p 01653693151 docker.io
     - docker stop demo_app_dev
     - docker system prune -a -f
