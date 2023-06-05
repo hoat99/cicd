@@ -8,7 +8,7 @@ build:
   image: maven:3.6.3-jdk-11-slim
   stage: build jar
   tags:
-    - r1
+    - shell-1
   before_script:
     - source .env
   script:
@@ -16,14 +16,25 @@ build:
   artifacts:
     paths:
       - target/*.jar
+docker build:
+  image: docker:stable
+  stage: build and push docker image
+  before_script:
+    - source .env
+  script:
+    - usermod -aG docker gitlab-runner
+    - docker build -t $DOCKER_REPO .
+    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
+    - docker push $DOCKER_REPO
 deploy:
-  image: docker:19.03.7-dind
+  image: ubuntu:latest
   stage: deploy
   before_script:
     - source .env
   tags:
-    - r1
+    - shell-1
   script:
+    - usermod -aG docker gitlab-runner
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
     - docker stop $APP_NAME
     - docker system prune -a -f
