@@ -9,8 +9,6 @@ build:
   stage: build jar
   tags:
     - shell-1
-  before_script:
-    - source .env
   script:
     - mvn clean install
   artifacts:
@@ -19,27 +17,23 @@ build:
 docker build:
   image: docker:stable
   stage: build and push docker image
-  before_script:
-    - source .env
   tags:
     - shell-1
   script:
     - usermod -aG docker gitlab-runner
-    - docker build -t $DOCKER_REPO .
-    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
+    - docker build -t hoat35999/cicd .
+    - docker login -u hoat35999 -p 01653693151 docker.io
     - docker push $DOCKER_REPO
 deploy:
   image: ubuntu:latest
   stage: deploy
-  before_script:
-    - source .env
   tags:
     - shell-1
   script:
     - usermod -aG docker gitlab-runner
-    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
-    - docker stop $APP_NAME
+    - docker login -u hoat35999 -p 01653693151 docker.io
+    - docker stop demo_app_dev
     - docker system prune -a -f
-    - docker pull $DOCKER_REPO
-    - docker container run -d --name $APP_NAME -p $PORT $DOCKER_REPO
+    - docker pull hoat35999/cicd
+    - docker container run -d --name demo_app_dev -p 8080 hoat35999/cicd
     - docker logout
