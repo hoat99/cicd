@@ -17,7 +17,7 @@ build:
     paths:
       - target/*.jar
 deploy:
-  image: docker:18.09.8
+  image: docker:19.03.7-dind
   stage: deploy
   before_script:
     - source .env
